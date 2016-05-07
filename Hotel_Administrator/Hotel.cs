@@ -8,6 +8,8 @@ namespace Hotel_Administrator
 {
     class Hotel
     {
+        private readonly int MAX_FLOOR_COUNT = 10;
+
         private List<List<Room>> floorList = new List<List<Room>>();
 
         public IReadOnlyList<List<Room>> FloorList
@@ -23,6 +25,41 @@ namespace Hotel_Administrator
             get
             {
                 return floorList.Count;
+            }
+        }
+
+        public int RoomNumber
+        {
+            get
+            {
+                int result = 0;
+                foreach (List<Room> floor in floorList)
+                    result += floor.Count;
+                return result;               
+            }
+        }
+
+        public int EmptyRoomNumber
+        {
+            get
+            {
+                int result = 0;
+                foreach (List<Room> floor in floorList)
+                    foreach (Room room in floor)
+                        if (room.IsEmpty) result++;
+                return result;
+            }
+        }
+
+        public int BusyRoomNumber
+        {
+            get
+            {
+                int result = 0;
+                foreach (List<Room> floor in floorList)
+                    foreach (Room room in floor)
+                        if (!room.IsEmpty) result++;
+                return result;
             }
         }
 
@@ -66,6 +103,8 @@ namespace Hotel_Administrator
 
         public void AddFloor()
         {
+            if (floorList.Count == MAX_FLOOR_COUNT)
+                throw new UserError("Достигнуто максимально возможное количество этажей.");
             floorList.Add(new List<Room>());
         }
 

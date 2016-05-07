@@ -20,6 +20,22 @@ namespace Hotel_Administrator
             }
         }
 
+        public int GuestNumber
+        {
+            get
+            {
+                return guestList.Count;
+            }
+        }
+
+        public int TodayLeaveNumber
+        {
+            get
+            {
+                return FindGuests("NNNNY", null, null, null, new DateTime(), DateTime.Now).Count;
+            }
+        }
+
         public Guests(Hotel h)
         {
             hotel = h;

@@ -22,11 +22,8 @@ namespace Hotel_Administrator
         /// </summary>
         [STAThread]
         static void Main()
-        {
-
-            
+        {            
             Application.Run(new MainForm());
-
         }
     }
 }

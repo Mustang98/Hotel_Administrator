@@ -28,7 +28,7 @@ namespace Hotel_Administrator
         {
             if (liveroom == null)
                 throw new ArgumentException("Ошибка заселения. Комната не передана.");
-            if (leave > DateTime.Now)
+            if (leave < DateTime.Now)
                 throw new UserError("Дата отъезда не может быть раньше текущей.");
             LiveRoom = liveroom;
             Enter = DateTime.Now;

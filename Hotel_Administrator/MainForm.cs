@@ -16,8 +16,7 @@ namespace Hotel_Administrator
     {
         private Guests guests;
         private Hotel hotel;
-        private event Delegate InformChange; 
-
+        private event Delegate InformChange;
 
         public MainForm()
         {
@@ -31,8 +30,8 @@ namespace Hotel_Administrator
             ////////
             hotel.AddFloor();
             hotel.AddFloor();
-            hotel.AddRoomRange(1, 215, 220, 1, 3, 15);
-            guests.SettleGuests(216, new DateTime(2017, 5, 6), new Guest("Ivan", "Petrov", "0502122222"));
+            hotel.AddRoomRange(1, 215, 220, "FIRSTЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕ", 3, 15);
+            guests.SettleGuests(216, new DateTime(2016, 5, 14), new Guest("Ivan", "Petrov", "0502122222"));
             showHotelPanel();
         }
 
@@ -84,14 +83,8 @@ namespace Hotel_Administrator
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        /////////
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        
-        private void addFloorButton_Click(object sender, EventArgs e)
+        //Обработчики событий
+        private void addFloor_Click(object sender, EventArgs e)
         {
             try
             {
@@ -103,13 +96,18 @@ namespace Hotel_Administrator
                 errorMessageShow(exception.Message);
             }                    
         }
-
-        
-        private void deleteFloorButton_Click(object sender, EventArgs e)
+       
+        private void deleteFloor_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить последний этаж вместе со всеми комнатами на нем?", "Подтверждение операции", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить последний этаж вместе со всеми комнатами на нем?", 
+                "Подтверждение операции", 
+                MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Question);
+
             if (result == DialogResult.No)
+            {
                 return;
+            }
 
             try
             {
@@ -123,12 +121,44 @@ namespace Hotel_Administrator
 
         }
 
-        private void addRoomsButton_Click(object sender, EventArgs e)
+        private void addRooms_Click(object sender, EventArgs e)
         {
-            hotel.AddRoomRange(10, 1, 24, 2, 2, 2);
-            InformChange();
+            if (hotel.FloorNumber == 0)
+            {
+                errorMessageShow("Для добавление номеров должен быть как минимум 1 этаж.");
+                return;
+            }
+            if ((new AddRoomsForm(hotel)).ShowDialog() == DialogResult.OK)
+            {
+                InformChange();
+            }
+        }
+
+        private void deleteRoom_Click(object sender, EventArgs e)
+        {
+            if (hotel.RoomNumber == 0)
+            {
+                errorMessageShow("Для удаления должен быть как минимум 1 номер.");
+                return;
+            }
+            if ((new DeleteRoomForm(hotel)).ShowDialog() == DialogResult.OK)
+            {
+                InformChange();
+            }
+        }
+
+        private void findEmptyRooms_Click(object sender, EventArgs e)
+        {
+            if (hotel.RoomNumber == 0)
+            {
+                errorMessageShow("Для поиска должен быть как минимум 1 номер.");
+                return;
+            }
+            if ((new FindRoomsForm(hotel)).ShowDialog() == DialogResult.OK)
+            {
+                InformChange();
+            }
         }
     }
-
    
 }

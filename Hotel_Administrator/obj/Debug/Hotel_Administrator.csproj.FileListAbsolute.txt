@@ -9,3 +9,5 @@ D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Ad
 D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.MainForm.resources
 D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.AddGuestsForm.resources
 D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.AddRoomsForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.DeleteRoomForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.FindRoomsForm.resources

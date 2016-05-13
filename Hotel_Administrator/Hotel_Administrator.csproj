@@ -59,6 +59,18 @@
     <Compile Include="AddRoomsForm.Designer.cs">
       <DependentUpon>AddRoomsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeleteRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteRoomForm.Designer.cs">
+      <DependentUpon>DeleteRoomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindRoomsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindRoomsForm.Designer.cs">
+      <DependentUpon>FindRoomsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,12 @@
     <EmbeddedResource Include="AddRoomsForm.resx">
       <DependentUpon>AddRoomsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DeleteRoomForm.resx">
+      <DependentUpon>DeleteRoomForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindRoomsForm.resx">
+      <DependentUpon>FindRoomsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,11 +107,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\DataSources\BookList.datasource" />
+    <None Include="Properties\DataSources\FindRoomsForm.datasource" />
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\Guests.datasource" />
     <None Include="Properties\DataSources\Hotel.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -35,14 +35,19 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HotelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.найтиСвободныйНомерToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddRoomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GuestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заселитьГостейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выселитьГостейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.найтиГостейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.посмотретьКвитанцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotelInformPanel = new System.Windows.Forms.GroupBox();
             this.hotelInformBusyCount = new System.Windows.Forms.Label();
+            this.hotelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hotelInformEmptyCount = new System.Windows.Forms.Label();
             this.hotelInformAllCount = new System.Windows.Forms.Label();
             this.hotelInformBusy = new System.Windows.Forms.Label();
@@ -50,6 +55,7 @@
             this.hotelInformAll = new System.Windows.Forms.Label();
             this.guestsInformPanel = new System.Windows.Forms.GroupBox();
             this.guestsInformLeaveCount = new System.Windows.Forms.Label();
+            this.guestsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.guestsInformAllCount = new System.Windows.Forms.Label();
             this.guestsInformLeave = new System.Windows.Forms.Label();
             this.guestsInformAll = new System.Windows.Forms.Label();
@@ -65,15 +71,14 @@
             this.addRoomsButton = new System.Windows.Forms.Button();
             this.deleteFloorButton = new System.Windows.Forms.Button();
             this.addFloorButton = new System.Windows.Forms.Button();
-            this.guestsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.hotelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.hotelInformPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hotelBindingSource)).BeginInit();
             this.guestsInformPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guestsBindingSource)).BeginInit();
             this.guestEditPanel.SuspendLayout();
             this.hotelEditPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guestsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hotelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -82,11 +87,10 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
             this.HotelToolStripMenuItem,
-            this.GuestsToolStripMenuItem,
-            this.HelpToolStripMenuItem});
+            this.GuestsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1040, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(976, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -121,6 +125,7 @@
             // HotelToolStripMenuItem
             // 
             this.HotelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.найтиСвободныйНомерToolStripMenuItem,
             this.AddRoomsToolStripMenuItem,
             this.DeleteRoomToolStripMenuItem,
             this.AddFloorToolStripMenuItem,
@@ -129,41 +134,75 @@
             this.HotelToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.HotelToolStripMenuItem.Text = "Гостинница";
             // 
+            // найтиСвободныйНомерToolStripMenuItem
+            // 
+            this.найтиСвободныйНомерToolStripMenuItem.Name = "найтиСвободныйНомерToolStripMenuItem";
+            this.найтиСвободныйНомерToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.найтиСвободныйНомерToolStripMenuItem.Text = "Найти свободный номер";
+            this.найтиСвободныйНомерToolStripMenuItem.Click += new System.EventHandler(this.findEmptyRooms_Click);
+            // 
             // AddRoomsToolStripMenuItem
             // 
             this.AddRoomsToolStripMenuItem.Name = "AddRoomsToolStripMenuItem";
-            this.AddRoomsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.AddRoomsToolStripMenuItem.Text = "Добавить номера";
+            this.AddRoomsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.AddRoomsToolStripMenuItem.Text = "Добавить этаж";
+            this.AddRoomsToolStripMenuItem.Click += new System.EventHandler(this.addFloor_Click);
             // 
             // DeleteRoomToolStripMenuItem
             // 
             this.DeleteRoomToolStripMenuItem.Name = "DeleteRoomToolStripMenuItem";
-            this.DeleteRoomToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.DeleteRoomToolStripMenuItem.Text = "Удалить номер";
+            this.DeleteRoomToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.DeleteRoomToolStripMenuItem.Text = "Удалить верхний этаж";
+            this.DeleteRoomToolStripMenuItem.Click += new System.EventHandler(this.deleteFloor_Click);
             // 
             // AddFloorToolStripMenuItem
             // 
             this.AddFloorToolStripMenuItem.Name = "AddFloorToolStripMenuItem";
-            this.AddFloorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.AddFloorToolStripMenuItem.Text = "Добавить этаж";
+            this.AddFloorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.AddFloorToolStripMenuItem.Text = "Добавить номер(а)";
+            this.AddFloorToolStripMenuItem.Click += new System.EventHandler(this.addRooms_Click);
             // 
             // DeleteFloorToolStripMenuItem
             // 
             this.DeleteFloorToolStripMenuItem.Name = "DeleteFloorToolStripMenuItem";
-            this.DeleteFloorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.DeleteFloorToolStripMenuItem.Text = "Удалить этаж";
+            this.DeleteFloorToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.DeleteFloorToolStripMenuItem.Text = "Удалить номер";
+            this.DeleteFloorToolStripMenuItem.Click += new System.EventHandler(this.deleteRoom_Click);
             // 
             // GuestsToolStripMenuItem
             // 
+            this.GuestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.заселитьГостейToolStripMenuItem,
+            this.выселитьГостейToolStripMenuItem,
+            this.найтиГостейToolStripMenuItem,
+            this.посмотретьКвитанцииToolStripMenuItem});
             this.GuestsToolStripMenuItem.Name = "GuestsToolStripMenuItem";
             this.GuestsToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.GuestsToolStripMenuItem.Text = "Гости";
             // 
-            // HelpToolStripMenuItem
+            // заселитьГостейToolStripMenuItem
             // 
-            this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
-            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.HelpToolStripMenuItem.Text = "Справка";
+            this.заселитьГостейToolStripMenuItem.Name = "заселитьГостейToolStripMenuItem";
+            this.заселитьГостейToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.заселитьГостейToolStripMenuItem.Text = "Заселить гостей";
+            // 
+            // выселитьГостейToolStripMenuItem
+            // 
+            this.выселитьГостейToolStripMenuItem.Name = "выселитьГостейToolStripMenuItem";
+            this.выселитьГостейToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.выселитьГостейToolStripMenuItem.Text = "Выселить гостей";
+            // 
+            // найтиГостейToolStripMenuItem
+            // 
+            this.найтиГостейToolStripMenuItem.Name = "найтиГостейToolStripMenuItem";
+            this.найтиГостейToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.найтиГостейToolStripMenuItem.Text = "Найти гостей";
+            // 
+            // посмотретьКвитанцииToolStripMenuItem
+            // 
+            this.посмотретьКвитанцииToolStripMenuItem.Name = "посмотретьКвитанцииToolStripMenuItem";
+            this.посмотретьКвитанцииToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.посмотретьКвитанцииToolStripMenuItem.Text = "Посмотреть квитанции";
             // 
             // hotelInformPanel
             // 
@@ -176,7 +215,7 @@
             this.hotelInformPanel.Controls.Add(this.hotelInformAll);
             this.hotelInformPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hotelInformPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.hotelInformPanel.Location = new System.Drawing.Point(790, 38);
+            this.hotelInformPanel.Location = new System.Drawing.Point(726, 38);
             this.hotelInformPanel.Name = "hotelInformPanel";
             this.hotelInformPanel.Size = new System.Drawing.Size(238, 146);
             this.hotelInformPanel.TabIndex = 21;
@@ -193,6 +232,10 @@
             this.hotelInformBusyCount.Size = new System.Drawing.Size(52, 17);
             this.hotelInformBusyCount.TabIndex = 27;
             this.hotelInformBusyCount.Text = "label3";
+            // 
+            // hotelBindingSource
+            // 
+            this.hotelBindingSource.DataSource = typeof(Hotel_Administrator.Hotel);
             // 
             // hotelInformEmptyCount
             // 
@@ -255,7 +298,7 @@
             this.guestsInformPanel.Controls.Add(this.guestsInformAll);
             this.guestsInformPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.guestsInformPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.guestsInformPanel.Location = new System.Drawing.Point(790, 201);
+            this.guestsInformPanel.Location = new System.Drawing.Point(726, 201);
             this.guestsInformPanel.Name = "guestsInformPanel";
             this.guestsInformPanel.Size = new System.Drawing.Size(238, 108);
             this.guestsInformPanel.TabIndex = 22;
@@ -272,6 +315,10 @@
             this.guestsInformLeaveCount.Size = new System.Drawing.Size(52, 17);
             this.guestsInformLeaveCount.TabIndex = 26;
             this.guestsInformLeaveCount.Text = "label2";
+            // 
+            // guestsBindingSource
+            // 
+            this.guestsBindingSource.DataSource = typeof(Hotel_Administrator.Guests);
             // 
             // guestsInformAllCount
             // 
@@ -324,7 +371,7 @@
             this.hotelPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hotelPanel.Location = new System.Drawing.Point(12, 47);
             this.hotelPanel.Name = "hotelPanel";
-            this.hotelPanel.Size = new System.Drawing.Size(761, 494);
+            this.hotelPanel.Size = new System.Drawing.Size(697, 494);
             this.hotelPanel.TabIndex = 19;
             // 
             // guestEditPanel
@@ -335,7 +382,7 @@
             this.guestEditPanel.Controls.Add(this.unsettleGuestsButton);
             this.guestEditPanel.Controls.Add(this.settleGuestsButton);
             this.guestEditPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.guestEditPanel.Location = new System.Drawing.Point(790, 326);
+            this.guestEditPanel.Location = new System.Drawing.Point(726, 326);
             this.guestEditPanel.Name = "guestEditPanel";
             this.guestEditPanel.Size = new System.Drawing.Size(238, 215);
             this.guestEditPanel.TabIndex = 23;
@@ -410,6 +457,7 @@
             this.deleteRoomsButton.TabIndex = 7;
             this.deleteRoomsButton.Text = "Удалить номер";
             this.deleteRoomsButton.UseVisualStyleBackColor = false;
+            this.deleteRoomsButton.Click += new System.EventHandler(this.deleteRoom_Click);
             // 
             // addRoomsButton
             // 
@@ -421,7 +469,7 @@
             this.addRoomsButton.TabIndex = 6;
             this.addRoomsButton.Text = "Добавить номер(а)";
             this.addRoomsButton.UseVisualStyleBackColor = false;
-            this.addRoomsButton.Click += new System.EventHandler(this.addRoomsButton_Click);
+            this.addRoomsButton.Click += new System.EventHandler(this.addRooms_Click);
             // 
             // deleteFloorButton
             // 
@@ -433,7 +481,7 @@
             this.deleteFloorButton.TabIndex = 5;
             this.deleteFloorButton.Text = "Удалить верхний этаж";
             this.deleteFloorButton.UseVisualStyleBackColor = false;
-            this.deleteFloorButton.Click += new System.EventHandler(this.deleteFloorButton_Click);
+            this.deleteFloorButton.Click += new System.EventHandler(this.deleteFloor_Click);
             // 
             // addFloorButton
             // 
@@ -445,21 +493,27 @@
             this.addFloorButton.TabIndex = 4;
             this.addFloorButton.Text = "Добавить этаж";
             this.addFloorButton.UseVisualStyleBackColor = false;
-            this.addFloorButton.Click += new System.EventHandler(this.addFloorButton_Click);
+            this.addFloorButton.Click += new System.EventHandler(this.addFloor_Click);
             // 
-            // guestsBindingSource
+            // button1
             // 
-            this.guestsBindingSource.DataSource = typeof(Hotel_Administrator.Guests);
-            // 
-            // hotelBindingSource
-            // 
-            this.hotelBindingSource.DataSource = typeof(Hotel_Administrator.Hotel);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.button1.Location = new System.Drawing.Point(757, 571);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 49);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Найти свободный номер";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.findEmptyRooms_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 649);
+            this.ClientSize = new System.Drawing.Size(976, 649);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.hotelEditPanel);
             this.Controls.Add(this.guestEditPanel);
             this.Controls.Add(this.hotelPanelTitle);
@@ -469,20 +523,20 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(10000, 688);
-            this.MinimumSize = new System.Drawing.Size(737, 688);
+            this.MinimumSize = new System.Drawing.Size(992, 688);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Администратор гостинницы";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.hotelInformPanel.ResumeLayout(false);
             this.hotelInformPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hotelBindingSource)).EndInit();
             this.guestsInformPanel.ResumeLayout(false);
             this.guestsInformPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guestsBindingSource)).EndInit();
             this.guestEditPanel.ResumeLayout(false);
             this.hotelEditPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.guestsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hotelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -497,7 +551,6 @@
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HotelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GuestsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddRoomsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteRoomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddFloorToolStripMenuItem;
@@ -528,6 +581,12 @@
         private System.Windows.Forms.Button addFloorButton;
         private System.Windows.Forms.Button deleteRoomsButton;
         private System.Windows.Forms.Button addRoomsButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem найтиСвободныйНомерToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem заселитьГостейToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выселитьГостейToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem найтиГостейToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem посмотретьКвитанцииToolStripMenuItem;
     }
 }
 

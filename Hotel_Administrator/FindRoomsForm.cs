@@ -7,71 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace Hotel_Administrator
 {
-    public partial class AddRoomsForm : Form
+    public partial class FindRoomsForm : Form
     {
         private Hotel hotel;
-        private int numberFirst, numberLast;
         private string _class;
         private int capacity;
         private double pricePerDay;
 
-        //конструктор
-        public AddRoomsForm(Hotel h)
+        public FindRoomsForm(Hotel h)
         {
             hotel = h;
             InitializeComponent();
-
-            for (int i = 1; i <= hotel.FloorNumber; i++)
-                floorComboBox.Items.Add(i);
-            floorComboBox.SelectedIndex = 0;
+            datePicker.MinDate = DateTime.Now;
         }
+        
 
         //валидаторы полей
-        private string roomNumberTextBox_Validate()
-        {
-            string text = roomNumberTextBox.Text;
-            if (text == "")
-            {
-                return "Заполните это поле";
-            }
-            Regex single = new Regex(@"^\d{1,9}$");
-            Regex range = new Regex(@"^\d{1,9}-\d{1,9}$");
-            if (single.IsMatch(text))
-            {
-                numberFirst = numberLast = Int32.Parse(text);
-                if (numberFirst == 0)
-                {
-                    return "Введите положительное число меньше миллиарда";
-                }
-                return "";
-            }
-
-            if (range.IsMatch(text))
-            {
-                numberFirst = Int32.Parse(text.Split('-')[0]);
-                numberLast = Int32.Parse(text.Split('-')[1]);
-
-                if (numberFirst == 0 || numberLast == 0)
-                {
-                    return "Номер комнаты должен быть от нуля до миллиарда";
-                }
-                return "";
-            }
-
-            return "Неверный формат";
-        }
-
         private string classTextBox_Validate()
         {
             _class = classTextBox.Text;
             if (_class == "")
             {
                 return "Заполните это поле";
-            }            
+            }
             return "";
         }
 
@@ -102,7 +63,7 @@ namespace Hotel_Administrator
             }
             return "";
         }
-        
+
         //удаление предупреждения при изменении текста
         private void textBox_TextChanged(object sender, EventArgs e)
         {
@@ -116,33 +77,28 @@ namespace Hotel_Administrator
                 errorProvider.SetError(target, null);
             }
         }
-        
-        //обработка добавления комнат
-        private void submitButton_Click(object sender, EventArgs e)
+
+        //формирование запроса на поиск
+        private void findButton_Click(object sender, EventArgs e)
         {
             //проверка всех полей формы
             string result;
             //флаг, все ли поля формы верны
             bool flag = true;
-            if ((result = roomNumberTextBox_Validate()) != "")
-            {
-                flag = false;
-                errorProvider.SetError(roomNumberTextBox, result);
-            }
-
-            if ((result = classTextBox_Validate()) != "")
+            
+            if (classCheckBox.Checked && (result = classTextBox_Validate()) != "")
             {
                 flag = false;
                 errorProvider.SetError(classTextBox, result);
             }
 
-            if ((result = capacityTextBox_Validate()) != "")
+            if (capacityCheckBox.Checked && (result = capacityTextBox_Validate()) != "")
             {
                 flag = false;
                 errorProvider.SetError(capacityTextBox, result);
             }
 
-            if ((result = priceTextBox_Validate()) != "")
+            if (priceCheckBox.Checked && (result = priceTextBox_Validate()) != "")
             {
                 flag = false;
                 errorProvider.SetError(priceLabel1, result);
@@ -150,25 +106,74 @@ namespace Hotel_Administrator
 
             if (flag == false)
                 return;
-
+            //проверка чекбоксов, составление критерия
+            string criteria = "";
+            criteria += classCheckBox.Checked ? "Y" : "N";
+            criteria += capacityCheckBox.Checked ? "Y" : "N";
+            criteria += priceCheckBox.Checked ? "Y" : "N";
             try
             {
-                hotel.AddRoomRange(floorComboBox.SelectedIndex + 1,
-                    numberFirst,
-                    numberLast,
+                IReadOnlyList<Room> foundRooms = hotel.FindEmptyRooms(criteria,
                     _class,
                     capacity,
-                    pricePerDay);
-                MessageBox.Show("Комнаты успешно добавлены.",
-                    "Добавление успешно",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
+                    pricePerDay,
+                    datePicker.Value);
+                showResult(foundRooms);
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message,
                     "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void showResult(IReadOnlyList<Room> foundRooms)
+        {
+            if (foundRooms.Count == 0)
+            {
+                nothingFound.Visible = true;
+            }
+            else
+            {
+                nothingFound.Visible = false;
+            }
+            searchResult.Rows.Clear();
+            foreach (Room room in foundRooms)
+            {
+                searchResult.Rows.Add(new object[] { room.Number,
+                    room.Class,
+                    room.Capacity,
+                    room.PricePerDay,
+                    room.IsEmpty,
+                    room.IsEmpty ? null : room.DateLeave.ToShortDateString() });
+            }
+        }
+
+        //включение/отключение параметра поиска
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox target = sender as CheckBox;
+            switch (target.Name)
+            {
+                case "classCheckBox":
+                    {
+                        classTextBox.Enabled = !classTextBox.Enabled;
+                        errorProvider.SetError(classTextBox, null);
+                        break;
+                    }
+                case "capacityCheckBox":
+                    {
+                        capacityTextBox.Enabled = !capacityTextBox.Enabled;
+                        errorProvider.SetError(capacityTextBox, null);
+                        break;
+                    }
+                case "priceCheckBox":
+                    {
+                        priceTextBox.Enabled = !priceTextBox.Enabled;
+                        errorProvider.SetError(priceLabel1, null);
+                        break;
+                    }
             }
         }
     }

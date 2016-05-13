@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hotel_Administrator
 {
-    class Hotel
+    public class Hotel
     {
         private readonly int MAX_FLOOR_COUNT = 10;
 
@@ -63,10 +63,13 @@ namespace Hotel_Administrator
             }
         }
 
-        public void AddRoomRange(int Floor, int NumberFirst, int NumberLast, int Class, int Capacity, int PricePerDay)
+        public void AddRoomRange(int Floor, int NumberFirst, int NumberLast, string Class, int Capacity, double PricePerDay)
         {
             if (Floor > FloorNumber || Floor <= 0)
                 throw new UserError("Добавление невозможно. Этажа с таким номером не существует. Мне твои комнаты в воздух подвесить?");
+
+            if (NumberFirst > NumberLast)
+                throw new UserError("Конечный номер комнаты не может быть меньше начального.");
 
             for (int i = NumberFirst; i <= NumberLast; i++)
                 if (FindRoomByNumber(i) != null)
@@ -82,9 +85,14 @@ namespace Hotel_Administrator
         public void DeleteRoom(int Number)
         {
             Room room = FindRoomByNumber(Number);
-            if (room == null) return;
+            if (room == null)
+            {
+                throw new ArgumentException($"Комнаты с номером {Number} не существует.");
+            }
             if (room.IsEmpty == false)
-                throw new UserError("Номер занят. Удаление невозможно.");
+            {
+                throw new ArgumentException("Номер занят. Удаление невозможно.");
+            }
             foreach (List<Room> floor in floorList)
             {
                 floor.Remove(room);
@@ -108,23 +116,35 @@ namespace Hotel_Administrator
             floorList.Add(new List<Room>());
         }
 
-        public IReadOnlyList<Room> FindEmptyRooms(string criteria/*"YYY"*/, int Class, int Capacity, int MaxPrice)
+        public IReadOnlyList<Room> FindEmptyRooms(string criteria/*"YYY"*/, string _class, int capacity, double maxPrice, DateTime date)
         {
             if (criteria.Length != 3)
+            {
                 throw new ArgumentException();
+            }
+
+            //сбрасываем точность до дня
+            DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            date = new DateTime(date.Year, date.Month, date.Day);
+
+            if (date < today)
+            {
+                throw new ArgumentException("Дата уже прошла.");
+            }
+
             List<Room> Result = new List<Room>();
 
             foreach (List<Room> floor in floorList)
             {
                 foreach (Room room in floor)
                 {
-                    if (room.IsEmpty == false)//комната занята
+                    if (room.IsEmpty == false && room.DateLeave > date)//комната занята в указанную дату
                         continue;
-                    if (criteria[0] == 'Y' && room.Class != Class)//не подходит класс
+                    if (criteria[0] == 'Y' && room.Class != _class)//не подходит класс
                         continue;
-                    if (criteria[1] == 'Y' && room.Capacity != Capacity)//не подходит ёмкость
+                    if (criteria[1] == 'Y' && room.Capacity < capacity)//не подходит ёмкость
                         continue;
-                    if (criteria[2] == 'Y' && room.PricePerDay > MaxPrice)//не подходит цена
+                    if (criteria[2] == 'Y' && room.PricePerDay > maxPrice)//не подходит цена
                         continue;
                     Result.Add(room);
                 }

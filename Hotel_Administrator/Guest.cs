@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hotel_Administrator
 {
-    class Guest
+    public class Guest
     {
         public string Name { get; private set; }
         public string SurName { get; private set; }
@@ -27,9 +27,13 @@ namespace Hotel_Administrator
         public void Settle(Room liveroom, DateTime leave)
         {
             if (liveroom == null)
-                throw new ArgumentException("Ошибка заселения. Комната не передана.");
-            if (leave < DateTime.Now)
-                throw new UserError("Дата отъезда не может быть раньше текущей.");
+            {
+                throw new ArgumentNullException("Ошибка заселения. Комната не передана.");
+            };
+            if (leave <= DateTime.Now)
+            {
+                throw new ArgumentOutOfRangeException("Дата отъезда должна быть позже текущей.");
+            };
             LiveRoom = liveroom;
             Enter = DateTime.Now;
             Leave = leave;

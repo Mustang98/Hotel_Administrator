@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace Hotel_Administrator
 {
-    class Guests
+    public class Guests
     {
+        //сслыка на гостинницу
         public readonly Hotel hotel;
-
         private List<Guest> guestList = new List<Guest>();
 
+        //конструктор
+        public Guests(Hotel h)
+        {
+            hotel = h;
+        }
+
+        
         public IReadOnlyList<Guest> GuestList
         {
             get
@@ -36,30 +43,21 @@ namespace Hotel_Administrator
             }
         }
 
-        public Guests(Hotel h)
-        {
-            hotel = h;
-        }
-
+        //в комнату нужно передать уже готовых гостей с датой отъезда, поэтому сначала делаем гостей, потом комнату
         public void SettleGuests(int roomNumber, DateTime leave, params Guest[] guests)
         {
             Room room = hotel.FindRoomByNumber(roomNumber);
             if (room == null)
+            {
                 throw new UserError(String.Format("Комнаты с номером {0} не существует.", roomNumber));
+            }
 
+            foreach (Guest curGuest in guests)
+            {
+                curGuest.Settle(room, leave);
+            }
+            
             room.SettleGuests(guests);
-
-            try
-            {
-                foreach (Guest curGuest in guests)
-                    curGuest.Settle(room, leave);
-            }
-            catch
-            {
-                room.MakeEmpty();
-                throw;
-            }
-
             guestList.AddRange(guests);
         }
 

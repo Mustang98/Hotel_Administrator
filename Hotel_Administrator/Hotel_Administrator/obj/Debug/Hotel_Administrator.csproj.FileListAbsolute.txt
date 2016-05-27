@@ -1,0 +1,17 @@
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\bin\Debug\Hotel_Administrator.exe
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\bin\Debug\Hotel_Administrator.pdb
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.csprojResolveAssemblyReference.cache
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.Properties.Resources.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.csproj.GenerateResource.Cache
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.exe
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.pdb
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.MainForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.AddRoomsForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.DeleteRoomForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.FindRoomsForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.AddGuestsForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.DeleteGuestsForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.ChangeLeaveForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.FindGuestsForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.RoomInfoForm.resources
+D:\УЧЁБА ХНУРЭ\ООП\Hotel_Administrator\Hotel_Administrator\Hotel_Administrator\obj\Debug\Hotel_Administrator.InvoicesForm.resources
